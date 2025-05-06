@@ -28,6 +28,8 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ffff">
     <style>
       :root {
         --primary: #10b981;
@@ -1392,6 +1394,13 @@
       }
     </style>
   </head>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch(err => console.log('SW registration failed:', err));
+  }
+</script>
   <body>
     <nav class="navbar">
       <div class="nav-container">
