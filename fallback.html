@@ -1,19 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Offline</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zayan-portfolio | Fallback</title>
+  <link rel="icon" href="zayan.png" type="image/png" />
+
   <style>
     body {
-      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
-      padding: 50px;
-      background: #000;
-      color: #000000;
+      flex-direction: column;
+    }
+
+    img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #00ffff;
+    }
+
+    p {
+      max-width: 300px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 20px;
+      background: #00ffff;
+      border: none;
+      border-radius: 5px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #00d1d1;
     }
   </style>
 </head>
+
 <body>
-  <h1>You’re Offline</h1>
-  <p>zayan-coder.github.io is still with you. Please reconnect when ready.</p>
+  <img src="zayan.png" alt="Zayan Logo" />
+  <h1>Oops! Something went wrong.</h1>
+  <p>think you're offline </p>
+  <button onclick="location.href='index.html'">Back to Home</button>
 </body>
 </html>
