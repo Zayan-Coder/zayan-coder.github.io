@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zayan's Projects</title>
+  <!-- Remix Icon CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f0;
+      text-shadow: 0 0 10px #0f0;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .project-card {
+      background-color: #111;
+      border: 1px solid #0f0;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 15px #0f08;
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.03);
+    }
+
+    .skeleton {
+      background-color: #0f02;
+      height: 180px;
+      border-radius: 6px;
+      animation: pulse 1.5s infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .project-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+
+    .project-desc {
+      font-size: 0.9em;
+      color: #8f8;
+    }
+
+    .project-title i {
+      margin-right: 6px;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .view-link {
+      text-decoration: none;
+      color: #0f0;
+      font-weight: bold;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-link i {
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Zayan's Projects</h1>
+  <div class="projects">
+    <!-- Skeletons shown while loading -->
+    <div class="project-card"><div class="skeleton"></div></div>
+    <div class="project-card"><div class="skeleton"></div></div>
+    <div class="project-card"><div class="skeleton"></div></div>
+  </div>
+
+  <script>
+    // Embedded projects JSON data
+    const projects = [
+      {
+        "title": "Smart Portfolio Site",
+        "description": "A responsive personal portfolio with neon UI and PWA features.",
+        "image": "https://example.com/images/portfolio.jpg",
+        "link": "portfolio.html"
+      },
+      {
+        "title": "AI Study Assistant",
+        "description": "An AI-powered assistant that helps with notes, quizzes, and more.",
+        "image": "https://example.com/images/ai-assistant.jpg",
+        "link": "ai-study-assistant.html"
+      },
+      {
+        "title": "ESP32 Feedback Server",
+        "description": "Interactive feedback system using ESP32 and LCD with admin panel.",
+        "image": "https://example.com/images/feedback-server.jpg",
+        "link": "esp32-feedback-server.html"
+      }
+    ];
+
+    // Render the project cards
+    const container = document.querySelector('.projects');
+    container.innerHTML = ''; // Clear skeletons
+    projects.forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <img src="${project.image}" alt="${project.title}">
+        <div class="project-title">
+          <i class="ri-folder-3-fill"></i> ${project.title}
+        </div>
+        <div class="project-desc">${project.description}</div>
+        <a href="${project.link}" class="view-link">
+          <i class="ri-arrow-right-line"></i> View Project
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
