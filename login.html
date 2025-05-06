@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign-up</title>
+    <style>
+        /* Glassmorphism background */
+        body {
+            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn {
+            background: #00ff00;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #00cc00;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .status-message {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .popup.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection">
+            <h2>Login</h2>
+            <input type="text" id="loginCode" placeholder="Enter your code">
+            <button class="btn" id="loginBtn">Login</button>
+            <div id="statusMessage" class="status-message hidden"></div>
+            <button class="btn" id="signUpBtn">Sign Up</button>
+        </div>
+
+        <!-- Sign-up Section -->
+        <div id="signupSection" class="hidden">
+            <h2>Sign Up</h2>
+            <input type="text" id="email" placeholder="Email">
+            <input type="text" id="username" placeholder="Username">
+            <button class="btn" id="sendCodeBtn">Send Code</button>
+        </div>
+
+        <!-- Sign-up Form -->
+        <div id="signUpForm" class="hidden">
+            <h2>Enter Your Code</h2>
+            <input type="text" id="codeInput" placeholder="Enter code received">
+            <button class="btn" id="verifyCodeBtn">Verify Code</button>
+        </div>
+    </div>
+
+    <!-- Popup for generated code -->
+    <div id="popup" class="popup">
+        <div id="generatedCode"></div>
+    </div>
+
+    <script>
+        const generatedCodes = [
+            "123456", "234567", "345678", "456789", "567890",
+            "678901", "789012", "890123", "901234", "012345",
+            "135791", "246802", "111222", "222333", "333444",
+            "444555", "555666", "666777", "777888", "888999",
+            "999000", "101112", "121314", "131415", "141516",
+            "151617", "161718", "171819", "181920", "192021",
+            "202122", "212223", "222324", "232425", "242526",
+            "252627", "262728", "272829", "282930", "293031",
+            "303132", "313233", "323334", "333435", "343536",
+            "353637", "363738", "373839", "383940", "394041"
+        ];
+
+        let currentCode = "";
+
+        // Show Login section
+        document.getElementById("loginSection").classList.remove("hidden");
+
+        // Handle Login
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            const enteredCode = document.getElementById("loginCode").value;
+            const storedCode = localStorage.getItem("generatedCode");
+
+            if (enteredCode === storedCode) {
+                document.getElementById("statusMessage").textContent = "Login successful!";
+                document.getElementById("statusMessage").style.color = "green";
+                document.getElementById("statusMessage").classList.remove("hidden");
+                setTimeout(function() {
+                    window.location.href = "index.html"; // Redirect to index.html after login
+                }, 2000);
+            } else {
+                document.getElementById("statusMessage").textContent = "Invalid code. Please try again.";
+                document.getElementById("statusMessage").style.color = "red";
+                document.getElementById("statusMessage").classList.remove("hidden");
+            }
+        });
+
+        // Handle Sign-Up
+        document.getElementById("signUpBtn").addEventListener("click", function() {
+            document.getElementById("loginSection").classList.add("hidden");
+            document.getElementById("signupSection").classList.remove("hidden");
+        });
+
+        // Handle sending code for Sign-up
+        document.getElementById("sendCodeBtn").addEventListener("click", function() {
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username").value;
+
+            if (email && username) {
+                const code = generatedCodes[Math.floor(Math.random() * generatedCodes.length)];
+                document.getElementById("generatedCode").textContent = `Your authentication code: ${code}`;
+                localStorage.setItem("generatedCode", code); // Save code to local storage
+                document.getElementById("popup").classList.add("active");
+
+                // Hide the popup after 10 seconds
+                setTimeout(function() {
+                    document.getElementById("popup").classList.remove("active");
+                }, 10000);
+
+                // Redirect to login after sending code
+                document.getElementById("signupSection").classList.add("hidden");
+                document.getElementById("loginSection").classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+</html>
