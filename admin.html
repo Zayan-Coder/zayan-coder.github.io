@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(circle, #0f0f0f, #000000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-box {
+      background: #1a1a1a;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      border: 2px solid #00f0ff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-box::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 180deg at 50% 50%, #00f0ff, #001f1f, #00f0ff);
+      animation: rotate 6s linear infinite;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+
+    h2 {
+      color: #00f0ff;
+      margin-bottom: 25px;
+      text-shadow: 0 0 5px #00f0ff;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #000;
+      border: 1px solid #00f0ff;
+      color: #00f0ff;
+      border-radius: 8px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    input::placeholder {
+      color: #00f0ff88;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #00f0ff;
+    }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Admin Panel</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Enter</button>
+    <p id="error"></p>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      const correctUser = "adminzayan";
+      const correctPass = "zayan1122";
+
+      if (user === correctUser && pass === correctPass) {
+        window.location.href = "start.html";
+      } else {
+        document.getElementById("error").textContent = "Wrong username or password!";
+      }
+    }
+  </script>
+</body>
+</html>
